@@ -82,7 +82,7 @@ def main():
     """
 
     # Load animal data.
-    animals_data = load_data('animals_data.json')
+    animals_data = fetch_animals_from_api("Fox")
     template_html = load_template("animals_template.html")
 
 
