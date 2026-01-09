@@ -1,4 +1,19 @@
 import json
+import os
+import requests
+
+BASE_URL = "https://api.api-ninjas.com/v1/animals"#
+
+def fetch_animals_from_api(animal_name: str):
+    api_key = os.getenv("API_NINJAS_KEY")
+
+    response = requests.get(
+        BASE_URL,
+        params={"name": animal_name},
+        headers={"X-Api-Key": api_key}
+    )
+    data = response.json()
+    return data
 
 def load_data(file_path):
   """ Loads a JSON file and return its content. """
@@ -82,7 +97,8 @@ def main():
     """
 
     # Load animal data.
-    animals_data = fetch_animals_from_api("Fox")
+    animal_name = input("Enter a name of an animal: ").strip()
+    animals_data = fetch_animals_from_api(animal_name)
     template_html = load_template("animals_template.html")
 
 
@@ -90,8 +106,9 @@ def main():
     animals_info = generate_animals_info(animals_data)
     final_html = template_html.replace("__REPLACE_ANIMALS_INFO__", animals_info)
 
-    # Write final HTMl file
+    # Write finial HTMl file
     write_html("animals.html", final_html)
+    print("Website was successfully generated to the file animals.html.")
 
 if __name__ == "__main__":
     main()
