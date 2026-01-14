@@ -1,10 +1,14 @@
 import os
 import requests
+from dotenv import load_dotenv
+
+# Load enviroment variables from .env file.
+load_dotenv()
 
 # Base URL of the API Ninjas animals endpoint.
 BASE_URL = "https://api.api-ninjas.com/v1/animals"
 # Read API key from environment variables.
-API_KEY = os.getenv("API_NINJAS_KEY")
+API_KEY = os.getenv("API_KEY")
 
 def fetch_data(animal_name: str):
   """
