@@ -1,7 +1,5 @@
 import json
-import os
-import requests
-
+import data_fetcher
 BASE_URL = "https://api.api-ninjas.com/v1/animals"#
 
 def fetch_animals_from_api(animal_name: str):
@@ -98,7 +96,7 @@ def main():
 
     # Load animal data.
     animal_name = input("Enter a name of an animal: ").strip()
-    animals_data = fetch_animals_from_api(animal_name)
+    animals_data = data_fetcher.fetch_data(animal_name)
     template_html = load_template("animals_template.html")
 
 
