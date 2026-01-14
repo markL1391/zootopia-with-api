@@ -102,8 +102,14 @@ def main():
     template_html = load_template("animals_template.html")
 
 
-    # Replace placeholder in template
-    animals_info = generate_animals_info(animals_data)
+    # Replace placeholder in template depending on API reponse.
+    if len(animals_data) == 0:
+        animals_info = (f'<h2>We searched high and low, but the animal '
+                        f'"<strong>{animal_name}</strong>" seems to be on vacation.<h2>'
+                        f'<p>Maybe try another name?</p>'
+                        )
+    else:
+        animals_info = generate_animals_info(animals_data)
     final_html = template_html.replace("__REPLACE_ANIMALS_INFO__", animals_info)
 
     # Write finial HTMl file
